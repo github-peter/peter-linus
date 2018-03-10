@@ -1,2 +1,2 @@
 # peter-linus
-Peter &amp; Linus Development files
+Peter &amp; Linus development files
