@@ -306,6 +306,10 @@ public class DBClientService {
     <title>DropboxV2Client</title>
   </head>
   <body>
-    <button class="button" type="button" name="sync">Sync with dopbox</button>
+    <input type="password" name="password input" value="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
+
+    <button class="button" type="button" id="sync" name="sync">Sync with dopbox</button>
+    <button class="button" type="button" id="syncHome" name="syncHome">Sync Home</button>
+    <button class="button" type="button" id="bothSync" name="bothSync">Both</button>
   </body>
 </html>
