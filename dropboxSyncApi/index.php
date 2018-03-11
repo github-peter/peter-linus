@@ -347,7 +347,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
     </audio>
 
 
-    <input type="password" name="password input" value="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
+    <input type="password" name="password input" >
 
     <button class="button" type="button" id="sync" name="sync">Sync with dopbox</button>
     <button class="button" type="button" id="syncHome" name="syncHome">Sync Home</button>
