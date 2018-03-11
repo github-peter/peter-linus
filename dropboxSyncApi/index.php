@@ -299,6 +299,13 @@ public class DBClientService {
   }
 }
 ?>
+<?php
+if (/*API KEY length + API KEY must be valid & must be a api that is connected with "peter's" Dropbox so noone else can steal and download the files to their  */) {
+    // Allowing to press the buttons to sync to dropbox
+  } else {
+    // Button's continue to be locked
+  }
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -306,6 +313,11 @@ public class DBClientService {
     <title>DropboxV2Client</title>
   </head>
   <body>
+
+    <!--
+    Loader with percentage for sync progress.
+  -->
+
     <input type="password" name="password input" value="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
 
     <button class="button" type="button" id="sync" name="sync">Sync with dopbox</button>
