@@ -281,6 +281,100 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
   <head>
     <meta charset="utf-8">
     <title>DropboxV2Client</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <style media="screen">
+        /*
+        #myBar {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        */
+        </style>
+
+        <script type="text/javascript">
+            function move() {
+                var elem = document.getElementById("myBar");
+                var width = 0;
+                var time = setInterval(frame, 100);
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(time);
+                        var audio1 = document.getElementById("sync");
+                        var audio2 = document.getElementById("syncHome");
+                        var audio3 = document.getElementById("bothSync");
+                        audio1.pause();
+                        audio2.pause();
+                        audio3.pause();
+                        audio2.currentTime = 0;
+                        audio1.currentTime = 0;
+                        audio3.currentTime = 0;
+
+                        document.write("<a href=\"./\"><h3>Sync Done Press To Sync Again</h3> </a>")
+
+                    } else {
+                        width++;
+                        elem.style.width = width + '%';
+                        elem.innerHTML = width * 1 + '%';
+                    }
+                }
+            }
+
+            function play(id)
+            {
+              // alert("id="+id);
+              var audio1 = document.getElementById("sync");
+              var audio2 = document.getElementById("syncHome");
+              var audio3 = document.getElementById("bothSync");
+              move();
+
+              if (id == "sync")
+              {
+
+                audio2.pause();
+                audio3.pause();
+                audio1.play();
+                audio2.currentTime = 0;
+                audio3.currentTime = 0;
+
+              }
+              else if (id == "syncHome")
+              {
+                audio1.pause();
+                audio3.pause();
+                audio2.play();
+                audio3.currentTime = 0;
+                audio1.currentTime = 0;
+
+              }
+              else if (id == "bothSync")
+              {
+                audio1.pause();
+                audio2.pause();
+                audio3.play();
+                audio2.currentTime = 0;
+                audio1.currentTime = 0;
+
+              }
+              else
+              {
+                audio1.pause();
+                audio2.pause();
+                audio3.pause();
+                audio2.currentTime = 0;
+                audio1.currentTime = 0;
+                audio3.currentTime = 0;
+              }
+            }
+        </script>
+
   </head>
   <body>
 
@@ -288,53 +382,6 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
         Loader with percentage for sync progress.
       -->
 
-          <script type="text/javascript">
-
-              function play(id)
-              {
-                // alert("id="+id);
-                var audio1 = document.getElementById("sync");
-                var audio2 = document.getElementById("syncHome");
-                var audio3 = document.getElementById("bothSync");
-
-                if (id == "sync")
-                {
-                  audio2.pause();
-                  audio3.pause();
-                  audio1.play();
-                  audio2.currentTime = 0;
-                  audio3.currentTime = 0;
-
-                }
-                else if (id == "syncHome")
-                {
-                  audio1.pause();
-                  audio3.pause();
-                  audio2.play();
-                  audio3.currentTime = 0;
-                  audio1.currentTime = 0;
-
-                }
-                else if (id == "bothSync")
-                {
-                  audio1.pause();
-                  audio2.pause();
-                  audio3.play();
-                  audio2.currentTime = 0;
-                  audio1.currentTime = 0;
-
-                }
-                else
-                {
-                  audio1.pause();
-                  audio2.pause();
-                  audio3.pause();
-                  audio2.currentTime = 0;
-                  audio1.currentTime = 0;
-                  audio3.currentTime = 0;
-                }
-              }
-          </script>
 
         <audio id="sync" src="EM.mp3" loop >
 
@@ -347,12 +394,20 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
         </audio>
 
         <center>
-        <input type="password" name="password input">
+          <form class="" action="" method="post">
+            <input type="password" name="password input">
+          </form>
         <br>
-          <button class="button" type="button" id="sync" name="sync" onclick="play('sync')">Sync with dopbox</button>
-          <button class="button" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')">Sync Home</button>
-          <button class="button" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')">Both</button>
-          <div id="container"></div>
+          <button  class="btn btn-primary" type="button" id="sync" name="sync" onclick="play('sync')">Sync To Dopbox</button>
+          <button  class="btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')">Sync To WebServer</button>
+          <button  class="btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')">Both</button>
        </center>
+       <br>
+       <div class="progress">
+        <div id="myBar" class="progress-bar progress-bar-striped active" role="progressbar"
+        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+          0%
+        </div>
+      </div>
   </body>
 </html>
