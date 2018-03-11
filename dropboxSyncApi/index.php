@@ -213,7 +213,7 @@ class DropboxV2Client
          "Content-Type: application/octet-stream",
          "Dropbox-API-Arg: {\"path\": \"$dropboxpath\",\"mute\": false}"
          );
-      
+
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
       curl_setopt($ch, CURLOPT_POST, 1);
@@ -274,7 +274,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
   }
  ?>
 <?php
-  // Percentage that determinds how much is left of sync. 
+  // Percentage that determinds how much is left of sync.
  ?>
 <!DOCTYPE html>
 <html>
@@ -287,6 +287,20 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
     <!--
     Loader with percentage for sync progress.
   -->
+
+      <script>
+    function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
+          //stop playing when done syncing
+    </script>
+
+    <input type="button" value="PLAY"  onclick="play()">
+    <audio id="audio" src="EM.mp3" controls loop >
+
+    </audio>
+
 
     <input type="password" name="password input" value="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
 
