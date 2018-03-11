@@ -300,7 +300,7 @@ public class DBClientService {
 }
 ?>
 <?php
-if (/*API KEY length + API KEY must be valid & must be a api that is connected with "peter's" Dropbox so noone else can steal and download the files to their  */) {
+if (/*API KEY length + API KEY must be valid & must be a api that is connected with "peter's" Dropbox so no one else can steal and download the files to their  */) {
     // Allowing to press the buttons to sync to dropbox
   } else {
     // Button's continue to be locked
