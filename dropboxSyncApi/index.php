@@ -1,21 +1,24 @@
 <?php
 class DropboxV2Client
 {
-
+   private $token;
+   public function __construct($tok)
+   {
+     $this->$token = "Bearer "+$tok;
+   }
+   public function createFolder($path)
+   {}
+   public function delete($path)
+   {}
+   public function getFile($foldername)
+   {}
+   public function listFolder($foldername)
+   {}
+   public function putFile($foldername, $path)
+   {}
   /*
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class DBClientService {
+
 
     private static final String token = "Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx";
 
