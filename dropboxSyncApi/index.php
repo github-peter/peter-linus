@@ -2,9 +2,9 @@
 class DropboxV2Client
 {
    private $token;
-   public function __construct($tok)
+   public function __construct($OAUTH2_ACCESS_TOKEN)
    {
-     $this->$token = "Bearer " . $tok;
+     $this->$token = "Bearer " . $OAUTH2_ACCESS_TOKEN;
    }
    public function createFolder($path)
    {
