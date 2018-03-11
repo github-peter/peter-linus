@@ -4,277 +4,264 @@ class DropboxV2Client
    private $token;
    public function __construct($tok)
    {
-     $this->$token = "Bearer "+$tok;
+     $this->$token = "Bearer " . $tok;
    }
    public function createFolder($path)
-   {}
-   public function delete($path)
-   {}
-   public function getFile($foldername)
-   {}
-   public function listFolder($foldername)
-   {}
-   public function putFile($foldername, $path)
-   {}
-  /*
+   {
+    /*
+    try {
+
+      URL url = new URL("https://api.dropboxapi.com/2/files/create_folder");
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      String parameters = "{\"path\": \"" + path + "\"}";
+
+      conn.setRequestProperty("Content-Type", "application/json");
+      conn.addRequestProperty ("Authorization", token);
+      conn.setRequestMethod("POST");
 
 
+      conn.setDoOutput(true);
 
-    private static final String token = "Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx";
+      DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+      writer.writeBytes(parameters);
+      writer.flush();
 
-    public void listFolder(String foldername) throws Exception {
+      if (writer != null)
+          writer.close();
 
-      try {
-
-        URL url = new URL("https://api.dropboxapi.com/2/files/list_folder");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        String parameters = "{\"path\": \"" + foldername + "\",\"recursive\": false,\"include_media_info\": false,\"include_deleted\": false,\"include_has_explicit_shared_members\": false}";
-
-        conn.setRequestProperty("Accept", "application/json");
-        conn.addRequestProperty ("Authorization", token);
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json");
-
-        conn.setDoOutput(true);
-
-        DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
-        writer.writeBytes(parameters);
-        writer.flush();
-
-        if (writer != null)
-            writer.close();
-
-        if (conn.getResponseCode() != 200) {
-            System.out.println(conn.getResponseMessage());
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + conn.getResponseCode());
-        }
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-            (conn.getInputStream())));
-
-        String output;
-        System.out.println("Output from Server .... \n");
-        while ((output = br.readLine()) != null) {
-            System.out.println(output);
-        }
-
-        conn.disconnect();
-
-      } catch (MalformedURLException e) {
-
-        e.printStackTrace();
-
-      } catch (IOException e) {
-
-        e.printStackTrace();
-
+      if (conn.getResponseCode() != 200) {
+          System.out.println(conn.getResponseMessage());
+          throw new RuntimeException("Failed : HTTP error code : "
+                  + conn.getResponseCode());
       }
+
+      BufferedReader br = new BufferedReader(new InputStreamReader(
+          (conn.getInputStream())));
+
+      String output;
+      System.out.println("Output from Server .... \n");
+      while ((output = br.readLine()) != null) {
+          System.out.println(output);
+      }
+
+      conn.disconnect();
+
+    } catch (MalformedURLException e) {
+
+      e.printStackTrace();
+
+    } catch (IOException e) {
+
+      e.printStackTrace();
 
     }
 
-    public void delete(String path) throws Exception {
+     */
+   }
+   public function delete($path)
+   {
+     /*
+     try {
 
-          try {
+       URL url = new URL("https://api.dropboxapi.com/2/files/delete_v2");
+       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+       String parameters = "{\"path\": \"" + path + "\"}";
 
-            URL url = new URL("https://api.dropboxapi.com/2/files/delete_v2");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            String parameters = "{\"path\": \"" + path + "\"}";
+       conn.setRequestProperty("Accept", "application/json");
+       conn.addRequestProperty ("Authorization", token);
+       conn.setRequestMethod("POST");
+       conn.setRequestProperty("Content-Type", "application/json");
 
-            conn.setRequestProperty("Accept", "application/json");
-            conn.addRequestProperty ("Authorization", token);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
+       conn.setDoOutput(true);
 
-            conn.setDoOutput(true);
+       DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+       writer.writeBytes(parameters);
+       writer.flush();
 
-            DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
-            writer.writeBytes(parameters);
-            writer.flush();
+       if (writer != null)
+           writer.close();
 
-            if (writer != null)
-                writer.close();
+       if (conn.getResponseCode() != 200) {
+           System.out.println(conn.getResponseMessage());
+           throw new RuntimeException("Failed : HTTP error code : "
+                   + conn.getResponseCode());
+       }
 
-            if (conn.getResponseCode() != 200) {
-                System.out.println(conn.getResponseMessage());
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
+       BufferedReader br = new BufferedReader(new InputStreamReader(
+           (conn.getInputStream())));
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                (conn.getInputStream())));
+       String output;
+       System.out.println("Output from Server .... \n");
+       while ((output = br.readLine()) != null) {
+           System.out.println(output);
+       }
 
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
+       conn.disconnect();
 
-            conn.disconnect();
+     } catch (MalformedURLException e) {
 
-          } catch (MalformedURLException e) {
+       e.printStackTrace();
 
-            e.printStackTrace();
+     } catch (IOException e) {
 
-          } catch (IOException e) {
+       e.printStackTrace();
 
-            e.printStackTrace();
+     }
+      */
+   }
+   public function getFile($foldername)
+   {
+     /*
+     try {
 
-          }
+       URL url = new URL("https://content.dropboxapi.com/2/files/download");
+       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+       String parameters = "{\"path\": \"" + foldername + "\"}";
 
-        }
+       conn.addRequestProperty ("Authorization", token);
+       conn.addRequestProperty ("Dropbox-API-Arg", parameters);
+       conn.setDoOutput(true);
 
-    public void createFolder(String path) throws Exception {
+       if (conn.getResponseCode() != 200) {
+           System.out.println(conn.getResponseMessage());
+           throw new RuntimeException("Failed : HTTP error code : "
+                   + conn.getResponseCode());
+       }
 
-          try {
+       BufferedReader br = new BufferedReader(new InputStreamReader(
+           (conn.getInputStream())));
 
-            URL url = new URL("https://api.dropboxapi.com/2/files/create_folder");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            String parameters = "{\"path\": \"" + path + "\"}";
+       String output;
+       System.out.println("Output from Server .... \n");
+       while ((output = br.readLine()) != null) {
+           System.out.println(output);
+       }
 
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.addRequestProperty ("Authorization", token);
-            conn.setRequestMethod("POST");
+       conn.disconnect();
 
+     } catch (MalformedURLException e) {
 
-            conn.setDoOutput(true);
+       e.printStackTrace();
 
-            DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
-            writer.writeBytes(parameters);
-            writer.flush();
+     } catch (IOException e) {
 
-            if (writer != null)
-                writer.close();
+       e.printStackTrace();
 
-            if (conn.getResponseCode() != 200) {
-                System.out.println(conn.getResponseMessage());
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
+     }
+      */
+   }
+   public function listFolder($foldername)
+   {
+     /*
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                (conn.getInputStream())));
+           try {
 
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
+             URL url = new URL("https://api.dropboxapi.com/2/files/list_folder");
+             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+             String parameters = "{\"path\": \"" + foldername + "\",\"recursive\": false,\"include_media_info\": false,\"include_deleted\": false,\"include_has_explicit_shared_members\": false}";
 
-            conn.disconnect();
+             conn.setRequestProperty("Accept", "application/json");
+             conn.addRequestProperty ("Authorization", token);
+             conn.setRequestMethod("POST");
+             conn.setRequestProperty("Content-Type", "application/json");
 
-          } catch (MalformedURLException e) {
+             conn.setDoOutput(true);
 
-            e.printStackTrace();
+             DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+             writer.writeBytes(parameters);
+             writer.flush();
 
-          } catch (IOException e) {
+             if (writer != null)
+                 writer.close();
 
-            e.printStackTrace();
+             if (conn.getResponseCode() != 200) {
+                 System.out.println(conn.getResponseMessage());
+                 throw new RuntimeException("Failed : HTTP error code : "
+                         + conn.getResponseCode());
+             }
 
-          }
+             BufferedReader br = new BufferedReader(new InputStreamReader(
+                 (conn.getInputStream())));
 
-        }
+             String output;
+             System.out.println("Output from Server .... \n");
+             while ((output = br.readLine()) != null) {
+                 System.out.println(output);
+             }
 
-    public void putFile(String foldername, String path) throws Exception {
+             conn.disconnect();
 
-          try {
+           } catch (MalformedURLException e) {
 
-            URL url = new URL("https://content.dropboxapi.com/2/files/upload");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            String parameters = "{\"path\": \"" + foldername + "\"}";
+             e.printStackTrace();
 
-            conn.setRequestProperty("Content-Type", "application/octet-stream");
-            conn.addRequestProperty ("Authorization", token);
-            conn.addRequestProperty ("Dropbox-API-Arg", parameters);
-            conn.setRequestMethod("POST");
+           } catch (IOException e) {
 
+             e.printStackTrace();
 
-            conn.setDoOutput(true);
+           }
 
-            Path pathFile = Paths.get(path);
-            byte[] data = Files.readAllBytes(pathFile);
+      */
+   }
+   public function putFile($foldername, $path)
+   {
+     /*
+     try {
 
-            DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
-            writer.writeBytes(parameters);
-            writer.flush();
+       URL url = new URL("https://content.dropboxapi.com/2/files/upload");
+       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+       String parameters = "{\"path\": \"" + foldername + "\"}";
 
-            writer.write(data);
-            writer.flush();
+       conn.setRequestProperty("Content-Type", "application/octet-stream");
+       conn.addRequestProperty ("Authorization", token);
+       conn.addRequestProperty ("Dropbox-API-Arg", parameters);
+       conn.setRequestMethod("POST");
 
-            if (writer != null)
-                writer.close();
 
-            if (conn.getResponseCode() != 200) {
-                System.out.println(conn.getResponseMessage());
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
+       conn.setDoOutput(true);
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                (conn.getInputStream())));
+       Path pathFile = Paths.get(path);
+       byte[] data = Files.readAllBytes(pathFile);
 
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
+       DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+       writer.writeBytes(parameters);
+       writer.flush();
 
-            conn.disconnect();
+       writer.write(data);
+       writer.flush();
 
-          } catch (MalformedURLException e) {
+       if (writer != null)
+           writer.close();
 
-            e.printStackTrace();
+       if (conn.getResponseCode() != 200) {
+           System.out.println(conn.getResponseMessage());
+           throw new RuntimeException("Failed : HTTP error code : "
+                   + conn.getResponseCode());
+       }
 
-          } catch (IOException e) {
+       BufferedReader br = new BufferedReader(new InputStreamReader(
+           (conn.getInputStream())));
 
-            e.printStackTrace();
+       String output;
+       System.out.println("Output from Server .... \n");
+       while ((output = br.readLine()) != null) {
+           System.out.println(output);
+       }
 
-          }
+       conn.disconnect();
 
-        }
+     } catch (MalformedURLException e) {
 
-    public void getFile(String foldername) throws Exception {
+       e.printStackTrace();
 
-          try {
+     } catch (IOException e) {
 
-            URL url = new URL("https://content.dropboxapi.com/2/files/download");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            String parameters = "{\"path\": \"" + foldername + "\"}";
+       e.printStackTrace();
 
-            conn.addRequestProperty ("Authorization", token);
-            conn.addRequestProperty ("Dropbox-API-Arg", parameters);
-            conn.setDoOutput(true);
-
-            if (conn.getResponseCode() != 200) {
-                System.out.println(conn.getResponseMessage());
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                (conn.getInputStream())));
-
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
-
-            conn.disconnect();
-
-          } catch (MalformedURLException e) {
-
-            e.printStackTrace();
-
-          } catch (IOException e) {
-
-            e.printStackTrace();
-
-          }
-
-        }
-
-
+     }
+     */
+   }
+  /*
     public static void main(String[] args) throws Exception {
         DBClientService dbcs = new DBClientService();
         String folderName = "/test_createFolder" + System.currentTimeMillis();
@@ -285,9 +272,8 @@ class DropboxV2Client
         dbcs.putFile("/test_createFolder/skills.txt", "C:/Users/IBM_ADMIN/Desktop/skills.txt");
         dbcs.getFile("/test_createFolder/skills.txt");
     }
-
-}
   */
+
   // ^Dropbox ReST API v2 to create folder, list folder, get, put and delete file using Java^
 
   function traverse_files($root)
