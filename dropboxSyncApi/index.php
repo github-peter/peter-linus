@@ -295,6 +295,9 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
     // Button's continue to be locked
   }
  ?>
+<?php
+  // Percentage that determinds how much is left of sync. 
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
