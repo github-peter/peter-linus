@@ -220,7 +220,7 @@ class DropboxV2Client
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
       curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 
-      $fh_res = fopen($local_path, 'r');
+      $fh_res = fopen($local_path, 'rb');
       $file_data = fread($fh_res, filesize($local_path));
       rewind($fh_res);
 
