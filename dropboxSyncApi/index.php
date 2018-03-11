@@ -203,63 +203,41 @@ class DropboxV2Client
 
       */
    }
-   public function putFile($foldername, $path)
+   // Return TRUE if the file was uploaded properly.
+   public function putFile($dropboxpath,$local_path)
    {
-     /*
-     try {
+      $url = "https://content.dropboxapi.com/2/files/upload";
+      $header = array(
+         "Authorization: ".$this->$token,
+         "Content-Length: ".filesize($local_path),
+         "Content-Type: application/octet-stream",
+         "Dropbox-API-Arg: {\"path\": \"$dropboxpath\",\"mute\": false}"
+         );
+      
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 
-       URL url = new URL("https://content.dropboxapi.com/2/files/upload");
-       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-       String parameters = "{\"path\": \"" + foldername + "\"}";
+      $fh_res = fopen($local_path, 'rb');
+      $file_data = fread($fh_res, filesize($local_path));
+      rewind($fh_res);
 
-       conn.setRequestProperty("Content-Type", "application/octet-stream");
-       conn.addRequestProperty ("Authorization", token);
-       conn.addRequestProperty ("Dropbox-API-Arg", parameters);
-       conn.setRequestMethod("POST");
+      curl_setopt($ch, CURLOPT_INFILE, $fh_res);
+      curl_setopt($ch, CURLOPT_INFILESIZE, filesize($local_path));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
+      $curl_response_res = curl_exec ($ch);
 
-       conn.setDoOutput(true);
+      //echo $curl_response_res; // Server response
+      //print_r(curl_getinfo($ch)); // Http Response
+      $http_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
 
-       Path pathFile = Paths.get(path);
-       byte[] data = Files.readAllBytes(pathFile);
+      curl_close($ch);
+      fclose($fh_res);
 
-       DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
-       writer.writeBytes(parameters);
-       writer.flush();
-
-       writer.write(data);
-       writer.flush();
-
-       if (writer != null)
-           writer.close();
-
-       if (conn.getResponseCode() != 200) {
-           System.out.println(conn.getResponseMessage());
-           throw new RuntimeException("Failed : HTTP error code : "
-                   + conn.getResponseCode());
-       }
-
-       BufferedReader br = new BufferedReader(new InputStreamReader(
-           (conn.getInputStream())));
-
-       String output;
-       System.out.println("Output from Server .... \n");
-       while ((output = br.readLine()) != null) {
-           System.out.println(output);
-       }
-
-       conn.disconnect();
-
-     } catch (MalformedURLException e) {
-
-       e.printStackTrace();
-
-     } catch (IOException e) {
-
-       e.printStackTrace();
-
-     }
-     */
+      return (200 === intval($http_code));
    }
   /*
     public static void main(String[] args) throws Exception {
