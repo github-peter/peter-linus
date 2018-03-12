@@ -374,6 +374,15 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
               }
             }
         </script>
+     <script>
+
+$(document).ready(function(){
+    $('.sendButton').prop('disabled',true);
+    $('#passwordInput').keyup(function(){
+        $('.sendButton').prop('disabled', this.value == "" ? true : false);     
+    })
+});  
+     </script>
 
   </head>
   <body>
@@ -395,12 +404,13 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
 
         <center>
           <form class="" action="" method="post">
-            <input type="password" name="password input">
+            <input type="password" name="passwordInput">
+            <input type="checkbox" name="CheckBox">
           </form>
         <br>
-          <button  class="btn btn-primary" type="button" id="sync" name="sync" onclick="play('sync')">Sync To Dopbox</button>
-          <button  class="btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')">Sync To WebServer</button>
-          <button  class="btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')">Both</button>
+          <button  class="btn btn-primary" disabledtype="button" id="sync" name="sync" onclick="play('sync')" disabled>Sync To Dopbox</button>
+          <button  class="btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')" disabled>Sync To WebServer</button>
+          <button  class="btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')" disabled>Both</button>
        </center>
        <br>
        <div class="progress">
