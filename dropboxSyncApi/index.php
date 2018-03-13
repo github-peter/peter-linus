@@ -327,7 +327,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
             }
             function play(id)
             {
-              // alert("id="+id);
+              // alert("id="+id); To show which button is pressed
               var audio1 = document.getElementById("sync");
               var audio2 = document.getElementById("syncHome");
               var audio3 = document.getElementById("bothSync");
