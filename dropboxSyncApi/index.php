@@ -310,7 +310,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
             function move() {
                 var elem = document.getElementById("progressBar");
                 var width = 0;
-                var time = setInterval(frame, 1);
+                var time = setInterval(frame, 10);
                 function frame() {
                     if (width >= 100) {
                         clearInterval(time);
