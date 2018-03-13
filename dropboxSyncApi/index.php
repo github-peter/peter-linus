@@ -277,6 +277,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
   // Percentage that determinds how much is left of sync.
  ?>
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -316,9 +317,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
                         audio2.currentTime = 0;
                         audio1.currentTime = 0;
                         audio3.currentTime = 0;
-
                         document.write("<a href=\"./\"><h3>Sync Done Press To Sync Again</h3> </a>")
-
                     } else {
                         width++;
                         elem.style.width = width + '%';
@@ -326,7 +325,6 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
                     }
                 }
             }
-
             function play(id)
             {
               // alert("id="+id);
@@ -334,16 +332,13 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
               var audio2 = document.getElementById("syncHome");
               var audio3 = document.getElementById("bothSync");
               move();
-
               if (id == "sync")
               {
-
                 audio2.pause();
                 audio3.pause();
                 audio1.play();
                 audio2.currentTime = 0;
                 audio3.currentTime = 0;
-
               }
               else if (id == "syncHome")
               {
@@ -352,7 +347,6 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
                 audio2.play();
                 audio3.currentTime = 0;
                 audio1.currentTime = 0;
-
               }
               else if (id == "bothSync")
               {
@@ -361,7 +355,6 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
                 audio3.play();
                 audio2.currentTime = 0;
                 audio1.currentTime = 0;
-
               }
               else
               {
@@ -374,15 +367,15 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
               }
             }
         </script>
-     <script>
-
-$(document).ready(function(){
-    $('.sendButton').prop('disabled',true);
-    $('#passwordInput').keyup(function(){
-        $('.sendButton').prop('disabled', this.value == "" ? true : false);     
-    })
-});  
-     </script>
+         <script>
+         //Lägg till senare så att man måste Checka Checkboxen OCH skriva in ApiKey
+        $(document).ready(function(){
+        $('.syncButton').prop('disabled',true);
+        $('#ApiKey').keyup(function(){
+        $('.syncButton').prop('disabled', this.value == "" ? true : false);
+            })
+        });
+         </script>
 
   </head>
   <body>
@@ -391,31 +384,31 @@ $(document).ready(function(){
         Loader with percentage for sync progress.
       -->
 
-
-        <audio id="sync" src="EM.mp3" loop >
-
-        </audio>
-        <audio id="syncHome" src="EM.mp3" loop >
-
-        </audio>
-        <audio id="bothSync" src="EM.mp3" loop >
-
-        </audio>
+          <audio id="sync" src="EM.mp3" loop > </audio>
+          <audio id="syncHome" src="EM.mp3" loop > </audio>
+          <audio id="bothSync" src="EM.mp3" loop > </audio>
 
         <center>
+  <br>
           <form class="" action="" method="post">
-            <input type="password" name="passwordInput">
-            <input type="checkbox" name="CheckBox">
+            <input type="password" id="ApiKey" name="ApiKey" placeholder="Enter ApiKey">
+            <input type="checkbox" id="ApiKeyCheckBox" name="ApiKeyCheckBox">
           </form>
-        <br>
-          <button  class="btn btn-primary" disabledtype="button" id="sync" name="sync" onclick="play('sync')" disabled>Sync To Dopbox</button>
-          <button  class="btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')" disabled>Sync To WebServer</button>
-          <button  class="btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')" disabled>Both</button>
+  <br>
+          <button  class="syncButton btn btn-primary" type="button" id="sync" name="sync" onclick="play('sync')" >Sync To Dopbox</button>
+          <button  class="syncButton btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')" >Sync To WebServer</button>
+          <button  class="syncButton btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')" >Both</button>
        </center>
-       <br>
+  <br>
        <div class="progress">
-        <div id="myBar" class="progress-bar progress-bar-striped active" role="progressbar"
-        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+        <div
+        class="progress-bar progress-bar-striped active"
+        role="progressbar"
+        aria-valuenow="0"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width:0%"
+        id="myBar" >
           0%
         </div>
       </div>
