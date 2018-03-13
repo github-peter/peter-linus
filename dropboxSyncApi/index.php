@@ -266,9 +266,13 @@ class DropboxV2Client
   }
 }
 ?>
+
+<!-- ======= -->
+
 <?php
 if (/*API KEY length + API KEY must be valid & must be a api that is connected with "peter's" Dropbox so no one else can steal and download the files to their  */) {
     // Allowing to press the buttons to sync to dropbox
+    
   } else {
     // Button's continue to be locked
   }
@@ -276,6 +280,8 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
 <?php
   // Percentage that determinds how much is left of sync.
  ?>
+
+ <!-- Right now there is javascript That does this. Will see later. -->
  <!DOCTYPE html>
  <html>
    <head>
