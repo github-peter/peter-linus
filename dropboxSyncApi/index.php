@@ -395,7 +395,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
 
          <center>
    <br>
-           <form class="" action="./" method="POST">
+           <form class="" action="./" method="POST" autocomplete="off">
              <!-- ^^ Use later to trigger PHP script ^^ -->
              <input type="password" id="ApiKey" name="ApiKey" placeholder="Enter ApiKey" required autocomplete="off">
              <input type="checkbox" id="ApiKeyCheckBox" name="ApiKeyCheckBox" required>
