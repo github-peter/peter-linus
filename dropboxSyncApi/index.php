@@ -272,7 +272,7 @@ class DropboxV2Client
 <?php
 if (/*API KEY length + API KEY must be valid & must be a api that is connected with "peter's" Dropbox so no one else can steal and download the files to their  */) {
     // Allowing to press the buttons to sync to dropbox
-    // Add header ./ so yoi can't submit Form again
+    // Add header("Location: //swedcraft.net/admin"); so you don't get the send again form alert
   } else {
     // Button's continue to be locked
   }
