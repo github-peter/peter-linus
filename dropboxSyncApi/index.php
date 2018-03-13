@@ -389,14 +389,15 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
 
          <center>
    <br>
-           <form class="" action="" method="post">
-             <input type="password" id="ApiKey" name="ApiKey" placeholder="Enter ApiKey">
-             <input type="checkbox" id="ApiKeyCheckBox" name="ApiKeyCheckBox">
-           </form>
+           <form class="" action="./" method="POST">
+             <!-- ^^ Use later to trigger PHP script ^^ -->
+             <input type="password" id="ApiKey" name="ApiKey" placeholder="Enter ApiKey" required autocomplete="off">
+             <input type="checkbox" id="ApiKeyCheckBox" name="ApiKeyCheckBox" required>
    <br>
-           <button  class="syncButton btn btn-primary" type="button" id="sync" name="sync" onclick="play('sync')" >Sync To Dopbox</button>
-           <button  class="syncButton btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')" >Sync To WebServer</button>
-           <button  class="syncButton btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')" >Both</button>
+             <button  class="syncButton btn btn-primary" type="button" id="sync" name="sync" onclick="play('sync')" >Sync To Dopbox</button>
+             <button  class="syncButton btn btn-info" type="button" id="syncHome" name="syncHome" onclick="play('syncHome')" >Sync To WebServer</button>
+             <button  class="syncButton btn btn-danger" type="button" id="bothSync" name="bothSync" onclick="play('bothSync')" >Both</button>
+           </form>
         </center>
    <br>
         <div class="progress">
