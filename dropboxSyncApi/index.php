@@ -305,13 +305,12 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
         */
 
         </style>
-
         <script type="text/javascript">
         // Music & Progress Bar script
             function move() {
                 var elem = document.getElementById("progressBar");
                 var width = 0;
-                var time = setInterval(frame, 1000);
+                var time = setInterval(frame, 1);
                 function frame() {
                     if (width >= 100) {
                         clearInterval(time);
@@ -324,7 +323,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
                         audio2.currentTime = 0;
                         audio1.currentTime = 0;
                         audio3.currentTime = 0;
-                        document.write("<a href=\"./\"><h3>Sync Done Press To Sync Again</h3> </a>")
+                        $('#done').html("<a href=\"./\"><h3>Sync Done Press Here To Sync Again</h3> </a>");
                     } else {
                         width++;
                         elem.style.width = width + '%';
@@ -373,7 +372,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
                 audio3.currentTime = 0;
               }
             }
-        // Buttons disabled script
+          // Buttons disabled script
          function TestInput()
          {
            if( $('#ApiKeyCheckBox').is(':checked')
@@ -399,12 +398,12 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
         <!--
         Loader with percentage for sync progress.
       -->
-
+      <center>
+       <div id="done" class="">
           <audio id="sync" src="EM.mp3" loop > </audio>
           <audio id="syncHome" src="EM.mp3" loop > </audio>
           <audio id="bothSync" src="EM.mp3" loop > </audio>
 
-        <center>
   <br>
           <form class="" action="./" method="POST">
             <!-- ^^ Use later to trigger PHP script ^^ -->
@@ -414,6 +413,9 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
             <button  class="syncButton btn btn-secondary" disabled type="button" id="sync" name="sync" onclick="play('sync')" >Sync To Dopbox</button>
             <button  class="syncButton btn btn-secondary" disabled type="button" id="syncHome" name="syncHome" onclick="play('syncHome')" >Sync To WebServer</button>
             <button  class="syncButton btn btn-secondary" disabled type="button" id="bothSync" name="bothSync" onclick="play('bothSync')" >Both</button>
+
+
+            </div>
           </form>
        </center>
   <br>
