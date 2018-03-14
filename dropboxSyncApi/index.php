@@ -427,7 +427,7 @@ if (/*API KEY length + API KEY must be valid & must be a api that is connected w
    <br>
         <div class="progress">
          <div
-         class="progress-bar progress-bar-striped active"
+         class="progress-bar progress-bar-striped progress-bar-animated"
          role="progressbar"
          aria-valuenow="0"
          aria-valuemin="0"
