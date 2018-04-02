@@ -28,54 +28,23 @@ class DropboxV2Client
    }
    public function delete($path)
    {
-     /*
-     try {
-
-       URL url = new URL("https://api.dropboxapi.com/2/files/delete_v2");
-       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-       String parameters = "{\"path\": \"" + path + "\"}";
-
-       conn.setRequestProperty("Accept", "application/json");
-       conn.addRequestProperty ("Authorization", token);
-       conn.setRequestMethod("POST");
-       conn.setRequestProperty("Content-Type", "application/json");
-
-       conn.setDoOutput(true);
-
-       DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
-       writer.writeBytes(parameters);
-       writer.flush();
-
-       if (writer != null)
-           writer.close();
-
-       if (conn.getResponseCode() != 200) {
-           System.out.println(conn.getResponseMessage());
-           throw new RuntimeException("Failed : HTTP error code : "
-                   + conn.getResponseCode());
-       }
-
-       BufferedReader br = new BufferedReader(new InputStreamReader(
-           (conn.getInputStream())));
-
-       String output;
-       System.out.println("Output from Server .... \n");
-       while ((output = br.readLine()) != null) {
-           System.out.println(output);
-       }
-
-       conn.disconnect();
-
-     } catch (MalformedURLException e) {
-
-       e.printStackTrace();
-
-     } catch (IOException e) {
-
-       e.printStackTrace();
-
-     }
-      */
+      $url = "https://content.dropboxapi.com/2/files/delete_v2";
+      $header = array(
+         "Authorization: ".$this->$token,
+         "Content-Length: ".filesize($path),
+         "Content-Type: application/json",
+         "Dropbox-API-Arg: {\"path\": \"$path\"}"
+         );
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      $curl_response_res = curl_exec ($ch);
+      $http_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+      curl_close($ch);
+      return (200 === intval($http_code));
    }
    public function getFile($foldername)
    {
