@@ -31,7 +31,6 @@ class DropboxV2Client
       $url = "https://content.dropboxapi.com/2/files/delete_v2";
       $header = array(
          "Authorization: ".$this->$token,
-         "Content-Length: ".filesize($path),
          "Content-Type: application/json",
          "Dropbox-API-Arg: {\"path\": \"$path\"}"
          );
@@ -46,46 +45,24 @@ class DropboxV2Client
       curl_close($ch);
       return (200 === intval($http_code));
    }
-   public function getFile($foldername)
+   // Get the content of the file at $path.
+   public function getFile($path)
    {
-     /*
-     try {
-
-       URL url = new URL("https://content.dropboxapi.com/2/files/download");
-       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-       String parameters = "{\"path\": \"" + foldername + "\"}";
-
-       conn.addRequestProperty ("Authorization", token);
-       conn.addRequestProperty ("Dropbox-API-Arg", parameters);
-       conn.setDoOutput(true);
-
-       if (conn.getResponseCode() != 200) {
-           System.out.println(conn.getResponseMessage());
-           throw new RuntimeException("Failed : HTTP error code : "
-                   + conn.getResponseCode());
-       }
-
-       BufferedReader br = new BufferedReader(new InputStreamReader(
-           (conn.getInputStream())));
-
-       String output;
-       System.out.println("Output from Server .... \n");
-       while ((output = br.readLine()) != null) {
-           System.out.println(output);
-       }
-
-       conn.disconnect();
-
-     } catch (MalformedURLException e) {
-
-       e.printStackTrace();
-
-     } catch (IOException e) {
-
-       e.printStackTrace();
-
-     }
-      */
+      $url = "https://content.dropboxapi.com/2/files/download";
+      $header = array(
+         "Authorization: ".$this->$token,
+         "Content-Type: application/json",
+         "Dropbox-API-Arg: {\"path\": \"$path\"}"
+         );
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      $curl_response = curl_exec ($ch);
+      curl_close($ch);
+      return $curl_response;
    }
    public function listFolder($foldername)
    {
