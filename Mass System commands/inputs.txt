@@ -1,0 +1,3 @@
+dir
+date
+echo hello World
