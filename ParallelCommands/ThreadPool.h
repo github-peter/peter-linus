@@ -14,11 +14,10 @@ class ThreadPool {
 private:
   class ThreadWorker {
   private:
-    int m_id;
     ThreadPool * m_pool;
   public:
-    ThreadWorker(ThreadPool * pool, const int id)
-      : m_pool(pool), m_id(id) {
+    ThreadWorker(ThreadPool * pool)
+      : m_pool(pool) {
     }
 
     void operator()() {
@@ -47,6 +46,9 @@ private:
 public:
   ThreadPool(const int n_threads)
     : m_threads(std::vector<std::thread>(n_threads)), m_shutdown(false) {
+    for (int i = 0; i < m_threads.size(); ++i) {
+      m_threads[i] = std::thread(ThreadWorker(this));
+    }
   }
 
   ThreadPool(const ThreadPool &) = delete;
@@ -54,13 +56,6 @@ public:
 
   ThreadPool & operator=(const ThreadPool &) = delete;
   ThreadPool & operator=(ThreadPool &&) = delete;
-
-  // Inits thread pool
-  void init() {
-    for (int i = 0; i < m_threads.size(); ++i) {
-      m_threads[i] = std::thread(ThreadWorker(this, i));
-    }
-  }
 
   // Waits until threads finish their current task and shutdowns the pool
   void shutdown() {
