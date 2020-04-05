@@ -1,34 +1,48 @@
+#include <chrono>
 #include <iostream>
-#include <stdlib.h> 
 #include <string>
-#include <vector>
 #include <fstream>
-#include "threadpool.h"
+#include "ThreadPool.h"
 
-void readInput(std::istream& in, std::vector<std::string>& commands)
+
+void executeSystem(std::string command)
 {
-    std::string row;
-    while(std::getline(in, row))
-    {
-        commands.push_back(row);
-    }
+    system(command.c_str());
 }
+
+void x2(double a)
+{
+    // std::cout << a*a << std::endl;
+    for(int i(0); i < 100000000 ; ++i)
+       a = a+21323;
+    //std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+}
+
 
 
 int main(int argc, char **argv)
 {
 
     std::cout << "Using at most " << std::thread::hardware_concurrency() << " threads.\n";
+    std::cout << argc << " Files in the input: " << argv << std::endl;
 
-    std::vector<std::string> commands;
+    ThreadPool TP(std::thread::hardware_concurrency());
     
     // std::cout << "command" << std::endl;
     std::ifstream inputFile;
-    for (int i = 1; i < argc; ++i) {
-        std::cout << argv[i] << std::endl;
+    std::vector< std::future<void> > futures;
+    for (long long int i = 1; i < argc; ++i) {
+
+        // futures.emplace_back( TP.submit(x2, i) );
+
+        // std::cout << argv[i] << std::endl;
 
         inputFile.open(argv[i]);
-        readInput(inputFile, commands);
+        std::string row;
+        while(std::getline(inputFile, row))
+        {
+            TP.submit(executeSystem, row);
+        }
         inputFile.close();
     }
 
@@ -41,13 +55,11 @@ int main(int argc, char **argv)
 
     // } while(input.length() > 0); 
 
-
-    for(auto& n : commands)
+    for( auto& f: futures)
     {
-        // std::cout << n << std::endl;
-        system(n.c_str());
+        f.get();
     }
-
+    TP.shutdown();
 
     return 0;
 }

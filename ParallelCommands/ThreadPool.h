@@ -45,7 +45,7 @@ private:
   std::condition_variable m_conditional_lock;
 public:
   ThreadPool(const int n_threads)
-    : m_threads(std::vector<std::thread>(n_threads)), m_shutdown(false) {
+    : m_threads(n_threads), m_shutdown(false) {
     for (int i = 0; i < m_threads.size(); ++i) {
       m_threads[i] = std::thread(ThreadWorker(this));
     }

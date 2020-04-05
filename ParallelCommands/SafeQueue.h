@@ -10,19 +10,6 @@ private:
   std::queue<T> m_queue;
   std::mutex m_mutex;
 public:
-  SafeQueue() {
-
-  }
-
-  SafeQueue(SafeQueue& other) {
-    //TODO:
-  }
-
-  ~SafeQueue() {
-
-  }
-
-
   bool empty() {
     std::unique_lock<std::mutex> lock(m_mutex);
     return m_queue.empty();
