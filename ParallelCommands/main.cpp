@@ -2,9 +2,8 @@
 #include <stdlib.h> 
 #include <string>
 #include <vector>
-#include <thread>
 #include <fstream>
-
+#include "threadpool.h"
 
 void readInput(std::istream& in, std::vector<std::string>& commands)
 {
@@ -18,6 +17,9 @@ void readInput(std::istream& in, std::vector<std::string>& commands)
 
 int main(int argc, char **argv)
 {
+
+    std::cout << "Using at most " << std::thread::hardware_concurrency() << " threads.\n";
+
     std::vector<std::string> commands;
     
     // std::cout << "command" << std::endl;
